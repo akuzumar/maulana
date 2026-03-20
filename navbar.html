@@ -1,15 +1,85 @@
+<style>
+  /* --- PENYESUAIAN LAYOUT BRAND (1 BARIS) --- */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-img {
+    height: 45px; /* Sesuaikan ukuran tinggi logo Anda di sini */
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-copy {
+    display: flex;
+    flex-direction: row; /* Mengubah susunan menjadi 1 baris menyamping */
+    align-items: center;
+    white-space: nowrap; /* Memaksa teks tetap 1 baris / tidak turun */
+  }
+
+  .brand-copy strong {
+    font-family: var(--font-display, "Cormorant Garamond", serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary-deep, #7f0c23);
+    line-height: 1;
+  }
+
+  .brand-copy span {
+    font-family: var(--font-body, "Plus Jakarta Sans", sans-serif);
+    font-size: 0.85rem;
+    color: var(--color-text-soft, rgba(17, 17, 17, 0.68));
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Menambahkan titik pemisah elegan antara teks utama dan tagline */
+  .brand-copy span::before {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-secondary, #d9b778);
+    margin: 0 10px; /* Jarak kiri-kanan titik */
+  }
+
+  /* Responsif untuk Layar HP */
+  @media (max-width: 768px) {
+    .brand-copy strong {
+      font-size: 1.1rem;
+    }
+    .brand-copy span {
+      font-size: 0.75rem;
+    }
+    .nav-img {
+      height: 35px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    /* Menyembunyikan tagline di layar HP yang sangat sempit 
+       agar tombol menu (hamburger) tidak tergeser/rusak */
+    .brand-copy span {
+       display: none; 
+    }
+  }
+  /* ------------------------------------------ */
+</style>
+
 <nav class="site-nav" data-nav-root>
   <div class="nav-shell">
-    <a class="brand" href="./" aria-label="Safir Al-Azhar Indonesia">
+    <a class="brand" href="./" aria-label="Maulana Center Indonesia">
       <!--Ganti Logonya Di Sini-->
-      <div class="brand-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-      </div>
+      <img src="aset/Background.png" alt="Logo Maulana" class="nav-img">
       <div class="brand-copy">
-        <!--Nama mediator, font bisa diganti di style.css-->
-        <strong>Safir Al-Azhar</strong>
-        <span>Indonesia to Cairo</span>
+        <!--Nama mediator, font mengambil dari style.css asli-->
+        <strong>Maulana Center</strong>
       </div>
     </a>
 
@@ -32,10 +102,9 @@
         <li><a data-nav-link href="testimoni/">Testimoni</a></li>
         <li><a data-nav-link href="faq/">FAQ</a></li>
         <li><a data-nav-link href="kontak/">Kontak</a></li>
+        
       </ul>
-
-      <!--Tombol Daftar-->
-      <a class="nav-cta" href="kontak/#form-kontak">Daftar Sekarang</a>
+      
     </div>
   </div>
 </nav>
