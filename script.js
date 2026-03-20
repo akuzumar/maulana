@@ -1,16 +1,11 @@
 const navbarMarkup = `
 <nav class="site-nav" data-nav-root>
   <div class="nav-shell">
-    <a class="brand" href="./" aria-label="Safir Al-Azhar Indonesia">
-      <!--Ganti Logonya Di Sini-->
-      <div class="brand-mark" aria-hidden="true">
-        <span></span>
-        <span></span>
-      </div>
+    <a class="brand" href="./" aria-label="Maulana Center Indonesia">
+      <img src="aset/logomerah.png" alt="Logo Maulana Center" class="nav-img" loading="eager" decoding="async" />
       <div class="brand-copy">
-        <!--Nama mediator, font bisa diganti di style.css-->
-        <strong>Safir Al-Azhar</strong>
-        <span>Indonesia to Cairo</span>
+        <strong>Maulana Center</strong>
+        <span class="nav-current" data-nav-current>Beranda</span>
       </div>
     </a>
 
@@ -97,7 +92,10 @@ function initNavbar() {
 
   const navToggle = navRoot.querySelector(".nav-toggle");
   const navMenu = navRoot.querySelector(".nav-menu");
+  const currentIndicator = navRoot.querySelector("[data-nav-current]");
   const currentPath = normalizePagePath(window.location.pathname);
+  let activeLabel = "Beranda";
+  let hasActiveNavLink = false;
 
   // Set active link berdasarkan route folder yang sedang dibuka
   navRoot.querySelectorAll("[data-nav-link]").forEach((link) => {
@@ -111,8 +109,22 @@ function initNavbar() {
 
     if (targetPath === currentPath) {
       link.classList.add("is-active");
+      link.setAttribute("aria-current", "page");
+      activeLabel = link.textContent?.trim() || activeLabel;
+      hasActiveNavLink = true;
+    } else {
+      link.classList.remove("is-active");
+      link.removeAttribute("aria-current");
     }
   });
+
+  if (!hasActiveNavLink && currentPath === "/") {
+    activeLabel = "Beranda";
+  }
+
+  if (currentIndicator) {
+    currentIndicator.textContent = activeLabel;
+  }
 
   // Toggle mobile menu
   if (navToggle && navMenu) {
@@ -133,7 +145,7 @@ function initNavbar() {
   // Close mobile menu when link is clicked
   navRoot.querySelectorAll(".nav-links a, .nav-cta").forEach((link) => {
     link.addEventListener("click", () => {
-      if (window.innerWidth <= 980 && navToggle && navMenu) {
+      if (window.innerWidth <= 1024 && navToggle && navMenu) {
         navToggle.classList.remove("is-open");
         navMenu.classList.remove("is-open");
         navToggle.setAttribute("aria-expanded", "false");
@@ -144,7 +156,7 @@ function initNavbar() {
 
   // Handle resize
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 980 && navToggle && navMenu) {
+    if (window.innerWidth > 1024 && navToggle && navMenu) {
       navToggle.classList.remove("is-open");
       navMenu.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
@@ -219,6 +231,11 @@ function initReveal() {
 }
 
 function initParallax() {
+  const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (shouldReduceMotion || window.innerWidth <= 980) {
+    return;
+  }
+
   const elements = document.querySelectorAll("[data-parallax]");
 
   if (!elements.length) {
