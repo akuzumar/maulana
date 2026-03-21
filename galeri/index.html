@@ -18,16 +18,11 @@
         /* VARIABEL WARNA */
         :root {
             --color-bg: #a80f2d;
-            /* Merah gelap Maulana Center */
             --color-card-bg: #f9ecec;
-            /* Warna terang untuk kartu sesuai referensi gambar */
             --color-text-main: #ffffff;
             --color-text-dark: #2d2620;
-            /* Teks gelap untuk di dalam kartu */
             --color-text-muted: #665b55;
-            /* Teks deskripsi */
             --color-secondary: #d9b778;
-            /* Emas */
             --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.15);
             --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.3);
             --radius-lg: 20px;
@@ -66,10 +61,48 @@
             pointer-events: none;
         }
 
+        /* TOMBOL KELUAR / KEMBALI */
+        /* TOMBOL KELUAR / KEMBALI (Fixed Navbar Style) */
+        .btn-back {
+            position: fixed;
+            /* Ini yang diubah agar selalu melayang */
+            top: 30px;
+            left: max(20px, calc((100% - 1300px) / 2));
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a80f2d;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            padding: 10px 24px;
+            border: 1px solid #c5a36366;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            /* Diberi background agak solid agar teks di bawahnya tidak bertabrakan */
+            transition: var(--transition);
+            z-index: 999;
+            /* Z-index dinaikkan agar selalu di atas gambar */
+            backdrop-filter: blur(10px);
+            /* Efek blur ala glassmorphism */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            /* Sedikit bayangan agar pop-up */
+        }
+
+        .btn-back:hover {
+            background: var(--color-secondary);
+            color: var(--color-bg);
+            border-color: var(--color-secondary);
+            transform: translateX(-5px);
+        }
+
         /* HEADER */
         .header-section {
             max-width: var(--container);
-            margin: 80px auto 50px;
+            margin: 100px auto 50px;
+            /* Margin top ditambah sedikit agar tidak menabrak tombol */
             text-align: center;
             padding: 0 20px;
             animation: fadeInDown 1s ease forwards;
@@ -110,7 +143,6 @@
             max-width: var(--container);
             margin: 0 auto 100px;
             padding: 0 10px;
-            /* Konfigurasi Kolom Pinterest */
             column-count: 4;
             column-gap: 24px;
         }
@@ -122,7 +154,6 @@
             box-shadow: var(--shadow-card);
             cursor: pointer;
             transition: var(--transition);
-            /* Mencegah kartu terpotong di antara kolom */
             break-inside: avoid;
             margin-bottom: 24px;
             transform: translateY(20px);
@@ -130,7 +161,6 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        /* Delay animasi acak agar terlihat natural */
         .gallery-item:nth-child(1) {
             animation-delay: 0.1s;
         }
@@ -209,7 +239,6 @@
             font-size: 0.9rem;
             line-height: 1.5;
             font-weight: 400;
-            /* Membatasi teks maksimal 2 baris agar gambar tetap dominan */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -309,19 +338,24 @@
         @media (max-width: 1024px) {
             .gallery-masonry {
                 column-count: 3;
-                /* 3 kolom untuk tablet landscape */
             }
         }
 
         @media (max-width: 768px) {
+            .btn-back {
+                top: 20px;
+                left: 20px;
+                padding: 8px 16px;
+                font-size: 0.75rem;
+            }
+
             .header-section {
-                margin-top: 60px;
+                margin-top: 90px;
                 margin-bottom: 40px;
             }
 
             .gallery-masonry {
                 column-count: 2;
-                /* 2 kolom untuk tablet portrait/mobile besar */
                 column-gap: 16px;
             }
 
@@ -341,7 +375,6 @@
         @media (max-width: 480px) {
             .gallery-masonry {
                 column-count: 1;
-                /* 1 kolom untuk HP layar kecil */
             }
         }
     </style>
@@ -351,6 +384,10 @@
 
     <div class="ambient-bg"></div>
 
+    <a href="../" class="btn-back">
+        &larr; Keluar
+    </a>
+
     <header class="header-section">
         <h1>Galeri Maulana Center</h1>
         <p>Momen-momen berharga dalam perjalanan santri menuju Universitas Al-Azhar, Mesir bersama Maulana Center.</p>
@@ -358,7 +395,6 @@
 
     <main class="gallery-masonry">
 
-        <!-- ITEM 1: Potret Tinggi -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/ogimage.png" alt="Bimbingan">
             <div class="item-content">
@@ -368,7 +404,6 @@
             </div>
         </div>
 
-        <!-- ITEM 2: Lanskap -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/1.jpeg" alt="Pelepasan Santri">
             <div class="item-content">
@@ -378,7 +413,6 @@
             </div>
         </div>
 
-        <!-- ITEM 3: Potret Standar -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/2.jpeg" alt="Bimbingan Belajar">
             <div class="item-content">
@@ -388,7 +422,6 @@
             </div>
         </div>
 
-        <!-- ITEM 4: Persegi -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/3.jpeg" alt="Kunjungan Cairo">
             <div class="item-content">
@@ -398,7 +431,6 @@
             </div>
         </div>
 
-        <!-- ITEM 5: Potret Tinggi -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/4.jpeg" alt="Fasilitas">
             <div class="item-content">
@@ -408,7 +440,6 @@
             </div>
         </div>
 
-        <!-- ITEM 6: Lanskap -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/5.jpeg" alt="Seminar">
             <div class="item-content">
@@ -418,7 +449,6 @@
             </div>
         </div>
 
-        <!-- ITEM 7: Persegi -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/6.jpeg" alt="Diskusi">
             <div class="item-content">
@@ -428,7 +458,6 @@
             </div>
         </div>
 
-        <!-- ITEM 8: Potret Pendek -->
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/7.jpeg" alt="Alumni">
             <div class="item-content">
@@ -440,7 +469,6 @@
 
     </main>
 
-    <!-- Lightbox (Zoom Gambar) -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <div class="lightbox-content" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeLightbox()" aria-label="Tutup lightbox">&times;</button>
