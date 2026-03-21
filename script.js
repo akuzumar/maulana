@@ -379,14 +379,27 @@ function initForms() {
         return;
       }
 
+      // Ambil nilai dari input form
+      const nama = form.querySelector("#nama")?.value.trim() || "-";
+      const whatsapp = form.querySelector("#whatsapp")?.value.trim() || "-";
+      const asal = form.querySelector("#asal")?.value.trim() || "-";
+      const minat = form.querySelector("#minat")?.value.trim() || "-";
+      const pesan = form.querySelector("#pesan")?.value.trim() || "-";
+
+      // Format kalimat untuk WhatsApp
+      const waText = `Halo tim Maulana Center,\nSaya ingin mengirim permintaan konsultasi dengan detail berikut:\n\n*Nama:* ${nama}\n*WhatsApp:* ${whatsapp}\n*Asal Kota / Pesantren:* ${asal}\n*Minat Layanan:* ${minat}\n\n*Kebutuhan / Pesan:* \n${pesan}`;
+      const waUrl = `https://wa.me/6281522775390?text=${encodeURIComponent(waText)}`;
+
       const originalText = button.textContent;
-      button.textContent = "Permintaan terkirim. Tim kami akan menghubungi Anda.";
+      button.textContent = "Mengalihkan ke WhatsApp...";
       button.setAttribute("disabled", "true");
 
       window.setTimeout(() => {
+        window.open(waUrl, "_blank");
         button.textContent = originalText;
         button.removeAttribute("disabled");
-      }, 2800);
+        // Opsional: form.reset(); jika ingin mengosongkan setelah terkirim
+      }, 700);
     });
   });
 }

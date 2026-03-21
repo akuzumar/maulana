@@ -9,7 +9,10 @@
     --radius-lg: 24px;
     --radius-md: 16px;
     --container-width: 1180px;
+    --nav-layer: 2147483000;
   }
+
+
 
   /* Container utama navbar tetap di atas saat scroll */
   .site-nav {
@@ -17,10 +20,12 @@
     top: 15px;
     left: 0;
     right: 0;
-    z-index: 9999;
+    z-index: var(--nav-layer);
     display: flex;
     justify-content: center;
     padding: 0 16px;
+    pointer-events: none;
+    isolation: isolate;
   }
 
   /* Bentuk kapsul (Island Style) */
@@ -39,6 +44,7 @@
     border: 1px solid rgba(125, 90, 40, 0.1);
     box-shadow: var(--shadow-soft);
     position: relative;
+    z-index: 1;
   }
 
   /* Brand / Logo */
@@ -94,6 +100,9 @@
   .nav-menu {
     display: flex;
     align-items: center;
+    position: relative;
+    z-index: 2;
+    pointer-events: auto;
   }
 
   .nav-links {
