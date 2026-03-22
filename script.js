@@ -412,3 +412,43 @@ function normalizePagePath(pathname) {
 
   return normalized || "/";
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Ambil semua elemen yang diperlukan
+  const modalTriggers = document.querySelectorAll('.modal-trigger');
+  const modals = document.querySelectorAll('.modal-overlay');
+  const closeBtns = document.querySelectorAll('.modal-close');
+
+  // Fungsi untuk Buka Popup
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault(); // Mencegah reload/scroll ke atas
+      const targetId = trigger.getAttribute('data-target');
+      const targetModal = document.getElementById(targetId);
+
+      if (targetModal) {
+        targetModal.classList.add('is-open');
+        document.body.classList.add('modal-open'); // Mengunci scroll body
+      }
+    });
+  });
+
+  // Fungsi untuk Tutup Popup menggunakan tombol "X"
+  closeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal-overlay');
+      modal.classList.remove('is-open');
+      document.body.classList.remove('modal-open'); // Membuka kunci scroll body
+    });
+  });
+
+  // Fungsi tambahan: Tutup popup jika user klik area blur (di luar kotak konten)
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('is-open');
+        document.body.classList.remove('modal-open');
+      }
+    });
+  });
+});

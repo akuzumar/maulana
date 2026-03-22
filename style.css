@@ -310,7 +310,6 @@ button {
 
 .nav-img {
   height: 45px;
-  /* Sesuaikan ukuran tinggi logo Anda di sini */
   width: auto;
   object-fit: contain;
 }
@@ -320,7 +319,6 @@ button {
   gap: 2px;
   align-items: start;
   white-space: nowrap;
-  /* Memaksa teks tetap 1 baris / tidak turun */
   min-width: 0;
 }
 
@@ -387,7 +385,6 @@ button {
   border-radius: 50%;
   background-color: var(--color-secondary, #d9b778);
   margin: 0 10px;
-  /* Jarak kiri-kanan titik */
 }
 
 .nav-menu {
@@ -561,30 +558,22 @@ button[disabled] {
 }
 
 .button1 {
-  /* Kode asli kamu */
   background: linear-gradient(135deg, #ffffff, #ffffff);
-  /* Mengganti var jika belum didefinisikan */
   color: #a80f2d;
   box-shadow: 0 14px 30px rgba(168, 15, 45, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.18);
   display: inline-block;
   padding: 15px 35px;
-  /* Memberi ruang di dalam tombol */
   border-radius: 50px;
-  /* Membuat bentuk pill/island */
   text-decoration: none;
-  /* Menghilangkan garis bawah link */
   white-space: nowrap;
-  /* KUNCI: Memaksa teks tetap satu baris */
   font-family: var(--font-body);
   transition: transform 0.2s;
   justify-content: center;
 }
 
-/* Membuat tombol ke tengah halaman */
 .container-center {
   display: flex;
   justify-content: center;
-  /* Menarik konten ke tengah secara horizontal */
   margin-top: 32px;
 }
 
@@ -687,7 +676,6 @@ button[disabled] {
   height: 76px;
   border-radius: 26px;
   background: rgba(255, 255, 255, 0.85);
-  /* Frosty white background */
   border: 1px solid rgba(255, 255, 255, 0.3);
   display: grid;
   place-items: center;
@@ -798,7 +786,6 @@ button[disabled] {
   padding: 48px;
   border-radius: 36px;
   background: rgba(42, 22, 25, 0.65);
-  /* Dark slightly warm glass */
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
   color: rgba(255, 255, 255, 0.95);
@@ -881,7 +868,6 @@ button[disabled] {
 .hero-home-card .button-outline {
   color: rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.08);
-  /* Dark glass */
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: none;
   padding: 0 28px;
@@ -1285,7 +1271,7 @@ button[disabled] {
 
 .gallery-grid {
   grid-template-columns: repeat(12, 1fr);
-  align-items: start;
+  align-items: stretch;
 }
 
 .gallery-item {
@@ -1293,8 +1279,8 @@ button[disabled] {
   grid-template-rows: auto 1fr;
   padding: 0;
   border-radius: 36px;
-  height: auto;
-  align-self: start;
+  height: 100%;
+  align-self: stretch;
   background: linear-gradient(180deg, rgba(255, 250, 247, 0.98), rgba(245, 236, 233, 0.98));
   border: 1px solid rgba(125, 90, 40, 0.14);
   box-shadow: 0 28px 72px rgba(81, 35, 27, 0.14);
@@ -1369,20 +1355,12 @@ button[disabled] {
   line-height: 1.02;
   letter-spacing: -0.05em;
   color: #2b201f;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
 }
 
 .gallery-caption p {
   color: rgba(62, 48, 46, 0.74);
   font-size: clamp(0.96rem, 1.15vw, 1.05rem);
   line-height: 1.55;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
 }
 
 .gallery-item.small .gallery-caption {
@@ -1696,10 +1674,7 @@ button[disabled] {
 }
 
 .article-meta span:last-child {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(17, 17, 17, 0.18);
+  /* Di-override untuk memastikan tidak menimpa gaya baru di header modal */
 }
 
 .faq-accordion {
@@ -1983,7 +1958,6 @@ button[disabled] {
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 14px 18px;
-
 }
 
 .footer-meta {
@@ -2044,7 +2018,6 @@ button[disabled] {
   right: 0;
   bottom: 0;
   width: 300%;
-  /* atur lebarnya disini (kecilkan % untuk mempersempit) */
   background: var(--color-primary);
   border-radius: 0 0 0 160px;
   z-index: -1;
@@ -2469,23 +2442,16 @@ button[disabled] {
   }
 
   .teacher-grid {
-    /* Ganti dengan class container foto Anda */
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    /* Jarak antar foto */
-
-    /* INI KUNCINYA: Membuat semua item sejajar di bagian bawah */
     align-items: flex-end;
-
     justify-content: center;
   }
 
   .teacher-grid .article-card {
-    /* Ganti dengan class pembungkus foto */
     flex: 1;
     min-width: 250px;
-    /* Sesuaikan lebar minimal agar responsif */
     display: flex;
     flex-direction: column;
   }
@@ -2493,10 +2459,8 @@ button[disabled] {
   .teacher-grid img {
     width: 100%;
     height: auto;
-    /* Membiarkan rasio foto bebas sesuai permintaan */
     display: block;
     border-radius: var(--radius-md);
-    /* Mengikuti style yang sudah ada */
   }
 
   .teacher-grid .article-cover {
@@ -2597,10 +2561,8 @@ button[disabled] {
 .footer-teks-navigasi {
   color: #a80f2d;
   text-decoration: none;
-  /* Opsional: menghilangkan garis bawah */
 }
 
-/* Menambahkan kursor berkedip pada efek typing */
 .hero-subtitle[data-typing]::after {
   content: "|";
   display: inline-block;
@@ -2614,5 +2576,134 @@ button[disabled] {
   .hero-subtitle[data-typing]::after {
     display: none;
     animation: none;
+  }
+}
+
+/* =========================================
+   MODAL / POPUP STYLES
+   ========================================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 20px;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-container {
+  background: #ffffff;
+  color: #111111;
+  width: 100%;
+  max-width: 800px;
+  /* Atur Lebar PopUp Artikel Disini */
+  max-height: 80vh;
+  border-radius: var(--radius-lg, 24px);
+  position: relative;
+  transform: translateY(30px) scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+  /* Perubahan: Membuat container flex dan menyembunyikan scroll di luar body */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-overlay.is-open .modal-container {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  /* Posisi absolute relatif terhadap container, jadinya akan "melayang" terus meskipun isi modal di-scroll */
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: rgba(168, 15, 45, 0.08);
+  color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+  /* Menaruhnya di atas konten */
+}
+
+/* Styling ikon SVG X presisi */
+.modal-close svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5px;
+}
+
+.modal-close:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  transform: scale(1.05);
+  /* Sedikit pop-up animasi hover */
+}
+
+.modal-body {
+  padding: 48px;
+  /* Scroll dipindahkan ke modal-body */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Modifikasi pada H2 untuk mencegah overlapping */
+.modal-body h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: #000000;
+  margin: 0 0 24px;
+  line-height: 1.2;
+}
+
+.modal-body img {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 30px;
+}
+
+.modal-content-text p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: rgba(17, 17, 17, 0.8);
+  margin-bottom: 18px;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .modal-body {
+    padding: 30px 24px;
+  }
+
+  .modal-close {
+    top: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
   }
 }
