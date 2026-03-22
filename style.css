@@ -33,6 +33,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   scroll-padding-top: calc(var(--nav-height) + 40px);
+  overflow-x: hidden;
 }
 
 body {
@@ -584,6 +585,7 @@ button[disabled] {
   display: flex;
   justify-content: center;
   /* Menarik konten ke tengah secara horizontal */
+  margin-top: 32px;
 }
 
 .button-outline {
@@ -654,6 +656,7 @@ button[disabled] {
   margin: 0 auto;
   min-height: calc(100vh - 160px);
   position: relative;
+  overflow: clip;
   border-radius: 44px;
   padding: 56px;
   background: linear-gradient(135deg, rgba(168, 15, 45, 0.45) 0%, rgba(93, 10, 24, 0.6) 100%);
@@ -1282,12 +1285,23 @@ button[disabled] {
 
 .gallery-grid {
   grid-template-columns: repeat(12, 1fr);
+  align-items: start;
 }
 
 .gallery-item {
+  display: grid;
+  grid-template-rows: auto 1fr;
   padding: 0;
-  height: 280px;
-  border-radius: 28px;
+  border-radius: 36px;
+  height: auto;
+  align-self: start;
+  background: linear-gradient(180deg, rgba(255, 250, 247, 0.98), rgba(245, 236, 233, 0.98));
+  border: 1px solid rgba(125, 90, 40, 0.14);
+  box-shadow: 0 28px 72px rgba(81, 35, 27, 0.14);
+}
+
+.gallery-item::before {
+  display: none;
 }
 
 .gallery-item.large {
@@ -1302,6 +1316,23 @@ button[disabled] {
   grid-column: span 3;
 }
 
+.gallery-media {
+  overflow: hidden;
+  background: rgba(87, 33, 29, 0.08);
+}
+
+.gallery-item.large .gallery-media {
+  aspect-ratio: 1.68 / 1;
+}
+
+.gallery-item.medium .gallery-media {
+  aspect-ratio: 1.32 / 1;
+}
+
+.gallery-item.small .gallery-media {
+  aspect-ratio: 0.98 / 1;
+}
+
 .gallery-item img {
   height: 100%;
   object-fit: cover;
@@ -1309,22 +1340,62 @@ button[disabled] {
 }
 
 .gallery-item:hover img {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .gallery-caption {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
-  padding: 18px;
-  border-radius: 20px;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.72));
-  color: #ffffff;
+  position: static;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  align-content: start;
+  gap: 12px;
+  padding: 28px 30px 32px;
+  min-height: 196px;
+  background: linear-gradient(180deg, rgba(255, 249, 246, 0.98), rgba(245, 236, 233, 0.98));
+  color: #2b201f;
+}
+
+.gallery-kicker {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(120, 101, 96, 0.82);
+}
+
+.gallery-caption h3 {
+  margin: 0;
+  font-size: clamp(1.72rem, 2vw, 2.3rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+  color: #2b201f;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 .gallery-caption p {
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(62, 48, 46, 0.74);
+  font-size: clamp(0.96rem, 1.15vw, 1.05rem);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.gallery-item.small .gallery-caption {
+  min-height: 196px;
+  padding: 24px 24px 28px;
+}
+
+.gallery-item.small .gallery-caption h3 {
+  font-size: clamp(1.36rem, 1.5vw, 1.74rem);
+}
+
+.gallery-item.small .gallery-caption p {
+  font-size: 0.92rem;
 }
 
 .cta-panel {
@@ -2014,10 +2085,13 @@ button[disabled] {
   }
 
   .site-nav {
-    padding-top: 12px;
+    padding: 12px 12px 0;
   }
 
   .nav-shell {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     padding: 14px 16px;
     align-items: stretch;
     flex-wrap: wrap;
@@ -2138,6 +2212,17 @@ button[disabled] {
   .hero-panel {
     padding: 36px 24px 32px;
     min-height: auto;
+    background: linear-gradient(160deg, rgba(129, 15, 37, 0.96) 0%, rgba(74, 12, 22, 0.98) 100%);
+    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.2);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .hero-panel.scroll-reveal,
+  .hero-panel.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .hero-home {
@@ -2150,17 +2235,31 @@ button[disabled] {
 
   .hero-home-card {
     padding: 30px 26px;
+    background: rgba(42, 22, 25, 0.9);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .hero-center-logo {
     width: 84px;
     height: 84px;
     border-radius: 28px;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16), 0 0 0 10px rgba(255, 255, 255, 0.04);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .hero-center-logo img {
     width: 56px;
     height: 56px;
+  }
+
+  .hero-home-card .button-outline {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .hero-shape-left {
@@ -2239,6 +2338,10 @@ button[disabled] {
 @media (max-width: 720px) {
   .section {
     padding: 86px 0;
+  }
+
+  .site-nav {
+    padding-inline: 9px;
   }
 
   .hero-panel,
@@ -2334,17 +2437,66 @@ button[disabled] {
     grid-column: span 1;
   }
 
+  .gallery-item {
+    border-radius: 30px;
+  }
+
+  .gallery-media,
+  .gallery-item.large .gallery-media,
+  .gallery-item.medium .gallery-media,
+  .gallery-item.small .gallery-media {
+    aspect-ratio: 1.18 / 1;
+  }
+
+  .gallery-caption,
+  .gallery-item.small .gallery-caption {
+    min-height: auto;
+    padding: 24px 22px 26px;
+  }
+
+  .gallery-caption h3,
+  .gallery-item.small .gallery-caption h3 {
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+  }
+
+  .gallery-caption p,
+  .gallery-item.small .gallery-caption p {
+    font-size: 1rem;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
 
   .teacher-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
+    /* Ganti dengan class container foto Anda */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* Jarak antar foto */
+
+    /* INI KUNCINYA: Membuat semua item sejajar di bagian bawah */
+    align-items: flex-end;
+
+    justify-content: center;
   }
 
   .teacher-grid .article-card {
-    padding: 18px;
+    /* Ganti dengan class pembungkus foto */
+    flex: 1;
+    min-width: 250px;
+    /* Sesuaikan lebar minimal agar responsif */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .teacher-grid img {
+    width: 100%;
+    height: auto;
+    /* Membiarkan rasio foto bebas sesuai permintaan */
+    display: block;
+    border-radius: var(--radius-md);
+    /* Mengikuti style yang sudah ada */
   }
 
   .teacher-grid .article-cover {
@@ -2455,4 +2607,12 @@ button[disabled] {
   margin-left: 4px;
   color: rgba(255, 255, 255, 0.8);
   animation: blink 1s step-end infinite;
+}
+
+@media (max-width: 980px),
+(prefers-reduced-motion: reduce) {
+  .hero-subtitle[data-typing]::after {
+    display: none;
+    animation: none;
+  }
 }

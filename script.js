@@ -177,6 +177,16 @@ function initTyping() {
     return;
   }
 
+  const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobileViewport = window.matchMedia("(max-width: 980px)").matches;
+
+  if (shouldReduceMotion || isMobileViewport) {
+    typingElement.textContent = entries[0];
+    return;
+  }
+
+  const shouldLoop = entries.length > 1;
+
   let textIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
@@ -195,6 +205,9 @@ function initTyping() {
     let delay = isDeleting ? 34 : 64;
 
     if (!isDeleting && charIndex === currentText.length) {
+      if (!shouldLoop) {
+        return;
+      }
       delay = 1700;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
