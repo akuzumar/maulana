@@ -1,41 +1,3 @@
-const navbarMarkup = `
-<nav class="site-nav" data-nav-root>
-  <div class="nav-shell">
-    <a class="brand" href="./" aria-label="Maulana Center Indonesia">
-      <img src="aset/logomerah.png" alt="Logo Maulana Center" class="nav-img" loading="eager" decoding="async" />
-      <div class="brand-copy">
-        <strong>Maulana Center</strong>
-        <span class="nav-current" data-nav-current>Beranda</span>
-      </div>
-    </a>
-
-    <button class="nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="nav-menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <!--Menu Navbar-->
-    <div class="nav-menu" id="nav-menu">
-      <ul class="nav-links">
-        <li><a data-nav-link href="profil/">Profil</a></li>
-        <li><a data-nav-link href="pengajar/">Pengajar</a></li>
-        <li><a data-nav-link href="program/">Program</a></li>
-        <li><a data-nav-link href="proses/">Proses</a></li>
-        <li><a data-nav-link href="persyaratan/">Persyaratan</a></li>
-        <li><a data-nav-link href="biaya/">Biaya</a></li>
-        <li><a data-nav-link href="artikel/">Artikel</a></li>
-        <li><a data-nav-link href="testimoni/">Testimoni</a></li>
-        <li><a data-nav-link href="faq/">FAQ</a></li>
-        <li><a data-nav-link href="kontak/">Kontak</a></li>
-      </ul>
-
-      <!--Tombol Daftar-->
-      <a class="nav-cta" href="kontak/#form-kontak">Daftar Sekarang</a>
-    </div>
-  </div>
-</nav>`;
-
 document.addEventListener("DOMContentLoaded", async () => {
   await loadNavbar();
   initNavbar();
@@ -66,21 +28,19 @@ async function loadNavbar() {
     return;
   }
 
-  let markup = navbarMarkup;
-
   try {
-    const response = await fetch("navbar.html", { cache: "no-store" });
+    const response = await fetch(new URL("navbar.html", document.baseURI), { cache: "no-store" });
     if (!response.ok) {
       throw new Error("Gagal memuat navbar.");
     }
-    markup = await response.text();
-  } catch (error) {
-    console.warn("Menggunakan markup navbar dari script.js:", error);
-  }
+    const markup = await response.text();
 
-  targets.forEach((target) => {
-    target.innerHTML = markup;
-  });
+    targets.forEach((target) => {
+      target.innerHTML = markup;
+    });
+  } catch (error) {
+    console.error("Gagal memuat navbar.html:", error);
+  }
 }
 
 function initNavbar() {
@@ -132,7 +92,7 @@ function initNavbar() {
       const isOpen = navToggle.classList.toggle("is-open");
       navMenu.classList.toggle("is-open", isOpen);
       navToggle.setAttribute("aria-expanded", String(isOpen));
-      
+
       // Prevent body scroll when menu is open
       if (isOpen) {
         document.body.style.overflow = "hidden";
