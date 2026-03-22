@@ -36,6 +36,29 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Menghilangkan highlight biru saat tap di mobile browser */
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* HILANGKAN FOCUS INDICATOR SECARA MENYELURUH */
+        /* Menghilangkan outline dan shadow default pada semua elemen */
+        *:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Menghilangkan outline khusus untuk elemen link dan button */
+        a:focus,
+        button:focus,
+        div:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Style hanya untuk navigasi keyboard agar tetap aksesibel */
+        *:focus-visible {
+            outline: 2px solid var(--color-secondary) !important;
+            outline-offset: 4px;
         }
 
         body {
@@ -62,10 +85,8 @@
         }
 
         /* TOMBOL KELUAR / KEMBALI */
-        /* TOMBOL KELUAR / KEMBALI (Fixed Navbar Style) */
         .btn-back {
             position: fixed;
-            /* Ini yang diubah agar selalu melayang */
             top: 30px;
             left: max(20px, calc((100% - 1300px) / 2));
             display: inline-flex;
@@ -81,14 +102,10 @@
             border: 1px solid #c5a36366;
             border-radius: 50px;
             background: rgba(255, 255, 255, 0.85);
-            /* Diberi background agak solid agar teks di bawahnya tidak bertabrakan */
             transition: var(--transition);
             z-index: 999;
-            /* Z-index dinaikkan agar selalu di atas gambar */
             backdrop-filter: blur(10px);
-            /* Efek blur ala glassmorphism */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            /* Sedikit bayangan agar pop-up */
         }
 
         .btn-back:hover {
@@ -102,7 +119,6 @@
         .header-section {
             max-width: var(--container);
             margin: 100px auto 50px;
-            /* Margin top ditambah sedikit agar tidak menabrak tombol */
             text-align: center;
             padding: 0 20px;
             animation: fadeInDown 1s ease forwards;
@@ -138,7 +154,7 @@
             margin: 0 auto;
         }
 
-        /* MASONRY GALLERY (PINTEREST STYLE) */
+        /* MASONRY GALLERY */
         .gallery-masonry {
             max-width: var(--container);
             margin: 0 auto 100px;
@@ -161,38 +177,6 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        .gallery-item:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .gallery-item:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .gallery-item:nth-child(3) {
-            animation-delay: 0.15s;
-        }
-
-        .gallery-item:nth-child(4) {
-            animation-delay: 0.3s;
-        }
-
-        .gallery-item:nth-child(5) {
-            animation-delay: 0.25s;
-        }
-
-        .gallery-item:nth-child(6) {
-            animation-delay: 0.4s;
-        }
-
-        .gallery-item:nth-child(7) {
-            animation-delay: 0.35s;
-        }
-
-        .gallery-item:nth-child(8) {
-            animation-delay: 0.5s;
-        }
-
         .gallery-item:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
@@ -210,7 +194,7 @@
             opacity: 0.9;
         }
 
-        /* KONTEN TEKS DI BAWAH GAMBAR */
+        /* KONTEN TEKS */
         .item-content {
             padding: 20px;
         }
@@ -314,7 +298,7 @@
             transform: rotate(90deg);
         }
 
-        /* KEYFRAMES */
+        /* ANIMASI */
         @keyframes fadeInUp {
             to {
                 opacity: 1;
@@ -334,7 +318,7 @@
             }
         }
 
-        /* RESPONSIVE LAYOUT */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .gallery-masonry {
                 column-count: 3;
@@ -351,24 +335,11 @@
 
             .header-section {
                 margin-top: 90px;
-                margin-bottom: 40px;
             }
 
             .gallery-masonry {
                 column-count: 2;
                 column-gap: 16px;
-            }
-
-            .gallery-item {
-                margin-bottom: 16px;
-            }
-
-            .item-content {
-                padding: 15px;
-            }
-
-            .item-content h3 {
-                font-size: 1.1rem;
             }
         }
 
@@ -389,6 +360,7 @@
     </a>
 
     <header class="header-section">
+        <span class="badge">Koleksi Visual</span>
         <h1>Galeri Maulana Center</h1>
         <p>Momen-momen berharga dalam perjalanan santri menuju Universitas Al-Azhar, Mesir bersama Maulana Center.</p>
     </header>
@@ -398,7 +370,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/ogimage.png" alt="Bimbingan">
             <div class="item-content">
-                <span class="category">Mudir Program</span>
                 <h3>Ust. Ahmad Fauzi, Lc.</h3>
                 <p>Mengarahkan strategi pembinaan dan evaluasi kesiapan peserta.</p>
             </div>
@@ -407,7 +378,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/1.jpeg" alt="Pelepasan Santri">
             <div class="item-content">
-                <span class="category">Kegiatan</span>
                 <h3>Pelepasan Santri 2023</h3>
                 <p>Momen haru keberangkatan santri gelombang pertama menuju Kairo, Mesir.</p>
             </div>
@@ -416,7 +386,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/2.jpeg" alt="Bimbingan Belajar">
             <div class="item-content">
-                <span class="category">Akademik</span>
                 <h3>Bimbingan Intensif</h3>
                 <p>Fokus penuh dalam mempersiapkan tes masuk Universitas Al-Azhar.</p>
             </div>
@@ -425,7 +394,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/3.jpeg" alt="Kunjungan Cairo">
             <div class="item-content">
-                <span class="category">Mesir</span>
                 <h3>Kunjungan ke Cairo</h3>
                 <p>Pengenalan lingkungan belajar dan kebudayaan lokal di Kairo.</p>
             </div>
@@ -434,7 +402,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/4.jpeg" alt="Fasilitas">
             <div class="item-content">
-                <span class="category">Fasilitas</span>
                 <h3>Ruang Belajar</h3>
                 <p>Kenyamanan fasilitas untuk menunjang daya serap ilmu para santri.</p>
             </div>
@@ -443,7 +410,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/5.jpeg" alt="Seminar">
             <div class="item-content">
-                <span class="category">Event</span>
                 <h3>Seminar Pendidikan</h3>
                 <p>Pembekalan mental dan wawasan keislaman sebelum keberangkatan.</p>
             </div>
@@ -452,7 +418,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/6.jpeg" alt="Diskusi">
             <div class="item-content">
-                <span class="category">Komunitas</span>
                 <h3>Forum Diskusi</h3>
                 <p>Membangun keakraban dan kekompakan antar calon mahasiswa baru.</p>
             </div>
@@ -461,7 +426,6 @@
         <div class="gallery-item" onclick="openLightbox(this)">
             <img src="../aset/7.jpeg" alt="Alumni">
             <div class="item-content">
-                <span class="category">Testimoni</span>
                 <h3>Sharing Alumni</h3>
                 <p>Kisah inspiratif dari para senior yang telah sukses beradaptasi di Mesir.</p>
             </div>
@@ -478,27 +442,23 @@
 
     <script>
         function openLightbox(element) {
-            // Mengambil source gambar dari dalam kartu yang di-klik
             const imgSrc = element.querySelector('img').src;
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
 
             lightboxImg.src = imgSrc;
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Menghentikan scroll halaman
+            document.body.style.overflow = 'hidden';
         }
 
         function closeLightbox() {
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('active');
-
-            // Tunggu animasi selesai sebelum mengaktifkan scroll kembali
             setTimeout(() => {
                 document.body.style.overflow = '';
             }, 300);
         }
 
-        // Tutup lightbox dengan tombol ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
